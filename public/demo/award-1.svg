@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500"><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#222226"/><stop offset="1" stop-color="#101012"/></linearGradient></defs><rect width="800" height="500" fill="url(#bg)"/><circle cx="400" cy="210" r="110" fill="none" stroke="#f2b35b" stroke-width="10"/><circle cx="400" cy="210" r="80" fill="#f2b35b"/>
+  <path d="M400 160L414 196H452L421 218L433 254L400 232L367 254L379 218L348 196H386Z" fill="#1a1a1c"/>
+  <path d="M340 300L310 390L350 370L370 410L400 320M460 300L490 390L450 370L430 410L400 320" fill="#f2b35b" opacity="0.8"/>
+  <text x="400" y="460" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700" letter-spacing="6" fill="#eaeaea" text-anchor="middle">SITE OF THE DAY</text></svg>

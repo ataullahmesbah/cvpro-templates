@@ -1,0 +1,351 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ------------------------------------------------------------------
+   Design tokens — CV Portfolio (dark + light)
+   The accent colour is injected at runtime from Site Settings:
+   --accent, --on-accent, --accent-ink-light.
+------------------------------------------------------------------- */
+:root {
+  --accent: #f2b35b;
+  --on-accent: #111111;
+  --accent-ink: var(--accent-ink-light, var(--accent));
+  /* kept for the admin dashboard */
+  --accent-2: var(--accent);
+
+  --bg: #f8f8f8;
+  --sidebar: #ffffff;
+  --surface: #ededed;
+  --card: #ffffff;
+  --heading: #000000;
+  --text: #6f6f6f;
+  --muted: #8b8b8b;
+  --border: rgba(0, 0, 0, 0.09);
+  --track: #e6e6e6;
+  --shadow: 0 16px 40px -20px rgba(0, 0, 0, 0.25);
+
+  /* Used by the admin dashboard */
+  --card-from: #ffffff;
+  --card-to: #ffffff;
+  --input-bg: #ffffff;
+  --header-bg: rgba(255, 255, 255, 0.85);
+
+  --font-heading: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --sidebar-w: 300px;
+}
+
+.dark {
+  --accent-ink: var(--accent);
+  --bg: #111111;
+  --sidebar: #000000;
+  --surface: #232323;
+  --card: #1a1a1a;
+  --heading: #ffffff;
+  --text: #b5b5b5;
+  --muted: #8f8f8f;
+  --border: rgba(255, 255, 255, 0.1);
+  --track: rgba(255, 255, 255, 0.1);
+  --shadow: 0 16px 40px -20px rgba(0, 0, 0, 0.8);
+
+  --card-from: #1a1a1a;
+  --card-to: #1a1a1a;
+  --input-bg: #161616;
+  --header-bg: rgba(17, 17, 17, 0.85);
+}
+
+@media (min-width: 1536px) {
+  :root { --sidebar-w: 400px; }
+}
+
+@theme inline {
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-accent-ink: var(--accent-ink);
+  --color-on-accent: var(--on-accent);
+  --color-bg: var(--bg);
+  --color-sidebar: var(--sidebar);
+  --color-surface: var(--surface);
+  --color-card: var(--card);
+  --color-heading: var(--heading);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-line: var(--border);
+  --color-track: var(--track);
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+  --breakpoint-xs: 30rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--heading);
+    line-height: 1.2;
+    font-weight: 700;
+  }
+  ::selection {
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  img {
+    max-width: 100%;
+  }
+  h1, h2, h3, p {
+    overflow-wrap: break-word;
+  }
+}
+
+@layer components {
+  /* Content column next to the sidebar */
+  .page {
+    width: 100%;
+    max-width: 1040px;
+    margin-inline: auto;
+    padding: 110px 20px 90px;
+  }
+  @media (min-width: 640px) {
+    .page { padding-inline: 40px; }
+  }
+  @media (min-width: 1040px) {
+    .page { padding-top: 100px; }
+  }
+
+  /* "NEWS" chip above page titles */
+  .chip {
+    display: inline-block;
+    background: var(--surface);
+    color: var(--muted);
+    font-family: var(--font-heading);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    line-height: 1.6;
+  }
+  .page-title {
+    font-size: clamp(2rem, 4vw, 2.6rem);
+    font-weight: 800;
+    margin-top: 14px;
+  }
+  .block-title {
+    font-size: clamp(1.4rem, 2.4vw, 1.7rem);
+    font-weight: 700;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 52px;
+    padding: 0 30px;
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 600;
+    border: 2px solid var(--heading);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .btn-solid {
+    background: var(--heading);
+    color: var(--bg);
+  }
+  .btn-solid:hover {
+    background: transparent;
+    color: var(--heading);
+  }
+  .btn-line {
+    color: var(--heading);
+  }
+  .btn-line:hover {
+    background: var(--heading);
+    color: var(--bg);
+  }
+  .btn-accent {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--on-accent);
+  }
+  .btn-accent:hover {
+    background: transparent;
+    color: var(--accent-ink);
+  }
+  /* Admin compatibility */
+  .btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--on-accent);
+  }
+  .btn-outline {
+    color: var(--heading);
+    border-color: var(--border);
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+  }
+  .neu {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+  }
+
+  .field {
+    width: 100%;
+    background: var(--input-bg);
+    border: 1px solid var(--border);
+    padding: 0.85rem 1rem;
+    color: var(--heading);
+    font-size: 15px;
+    transition: border-color 0.3s ease;
+  }
+  .field:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  .field::placeholder {
+    color: var(--muted);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-style: italic;
+    font-size: 14px;
+  }
+
+  /* Photos are black & white; they get their colour back on hover. */
+  .mono {
+    filter: grayscale(1);
+    transition: filter 0.6s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .group:hover .mono,
+  .group:focus-visible .mono {
+    filter: grayscale(0);
+  }
+
+  .divider {
+    border-top: 1px solid var(--border);
+  }
+
+  .prose-content p { margin-bottom: 1.25rem; }
+  .prose-content h2 { font-size: 1.5rem; margin: 2.2rem 0 0.9rem; }
+  .prose-content ul { list-style: disc; padding-left: 1.4rem; margin-bottom: 1.25rem; }
+  .prose-content li { margin-bottom: 0.4rem; }
+
+  /* Contact map: grey in light mode, dark in dark mode */
+  .map-frame {
+    filter: grayscale(1) contrast(1.05);
+  }
+  .dark .map-frame {
+    filter: grayscale(1) invert(0.92) contrast(0.85);
+  }
+}
+
+/* ---------- Home: the morphing photo shape ---------- */
+@keyframes morph {
+  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  25% { border-radius: 40% 60% 55% 45% / 45% 60% 40% 55%; }
+  50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  75% { border-radius: 55% 45% 40% 60% / 60% 45% 55% 40%; }
+}
+.blob {
+  animation: morph 9s ease-in-out infinite;
+}
+.blob-ring {
+  animation: morph 9s ease-in-out -2.5s infinite;
+}
+
+/* Typing caret */
+@keyframes caret {
+  50% { opacity: 0; }
+}
+.caret {
+  animation: caret 0.9s steps(1) infinite;
+}
+
+/* ---------- Mouse cursor ---------- */
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  will-change: transform;
+}
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  background: var(--accent);
+}
+.cursor-ring {
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border: 1.5px solid var(--accent);
+  transition: opacity 0.3s ease, width 0.3s ease, height 0.3s ease, margin 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+.cursor-on .cursor-dot,
+.cursor-on .cursor-ring {
+  opacity: 1;
+}
+.cursor-hover .cursor-ring {
+  width: 64px;
+  height: 64px;
+  margin: -32px 0 0 -32px;
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  border-color: transparent;
+}
+.cursor-hover .cursor-dot {
+  opacity: 0;
+}
+.cursor-down .cursor-ring {
+  width: 28px;
+  height: 28px;
+  margin: -14px 0 0 -14px;
+}
+
+/* Infinite logo marquee */
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee 30s linear infinite;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
